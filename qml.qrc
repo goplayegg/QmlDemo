@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>SideBar.qml</file>
+        <file>SideBarItem.qml</file>
+        <file>SideBarSlider.qml</file>
+        <file>banana.png</file>
+        <file>coment.png</file>
+        <file>like.png</file>
+        <file>LeftNevig.qml</file>
+        <file>Button.qml</file>
+        <file>Icon.qml</file>
+        <file>RoundButton.qml</file>
+        <file>RoundImage.qml</file>
+        <file>RoundMouseArea.qml</file>
+        <file>a_z.png</file>
+        <file>u9.png</file>
+        <file>ub.png</file>
+        <file>uc.png</file>
+        <file>ug.png</file>
+        <file>uh.png</file>
+        <file>z0.png</file>
+        <file>zz.png</file>
+        <file>e.png</file>
+        <file>d.png</file>
+    </qresource>
+</RCC>
