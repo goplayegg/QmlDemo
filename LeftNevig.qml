@@ -9,14 +9,24 @@ Rectangle{
         NumberAnimation{ duration: 100; easing.type: Easing.OutQuad}
     }
 
+    property bool logined :false
+    property var jsLogin : ({avatar:"",username:"",userid:""})
     property alias shrinked: tabBar.shrinked
     property alias curIdx: tabBar.curIdx
     property alias norWidth: tabBar.norWidth
     property alias shrinkWidth: tabBar.shrinkWidth
 
+    function loginInfo(){
+        jsLogin = {
+            "avatar":"qrc:/avatar.jpg",
+            "username":"敌军还有30秒到达葬场",
+            "userid":"923834"}
+        console.log("jsLogin", JSON.stringify(jsLogin))
+    }
+
     Item{
         id:topArea
-        height: shrinked?160:112
+        height: logined?(shrinked?160:237):(shrinked?160:112)
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -46,6 +56,7 @@ Rectangle{
         }
         Button{
             id:btnLogin
+            visible: !logined
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.bottom: parent.bottom
@@ -56,6 +67,54 @@ Rectangle{
             background: Rectangle{
                 color: shrinked?"white":"#00A1D6"
                 radius: shrinked?height/2:3
+            }
+            onClicked: {
+                loginInfo()
+                logined = true
+            }
+        }
+        RoundImage{
+            id:imgAvatar
+            visible: logined
+            source: jsLogin.avatar
+            y: btnCategory.y+btnCategory.height+20
+            anchors.horizontalCenter: parent.horizontalCenter
+            size: shrinked?40:60
+            onClicked: logined = false
+        }
+        Text{
+            id:txUserName
+            visible: logined&&(!shrinked)
+            text: jsLogin.username
+            font.pointSize: 10
+            font.family: "微软雅黑"
+            font.weight: Font.Bold
+            anchors.top: imgAvatar.bottom
+            anchors.topMargin: 22
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        Text{
+            id:txUserId
+            visible: txUserName.visible
+            text: jsLogin.userid
+            anchors.top: txUserName.bottom
+            anchors.topMargin: 5
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        Grid{
+            columns: 3
+            rowSpacing: 5
+            visible: txUserName.visible
+            anchors.top: txUserId.bottom
+            anchors.topMargin: 15
+            width: parent.width
+            Repeater {
+                model: ["4454444","14", "144222466", "动态", "关注", "粉丝"]
+                Text {
+                    text: modelData;
+                    width: parent.width/3;
+                    horizontalAlignment: Text.AlignHCenter;
+                }
             }
         }
     }

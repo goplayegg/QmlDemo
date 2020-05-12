@@ -14,13 +14,12 @@ Item {
 
     Component {
         id: barComp
-        Button{
+        Button {
             id: btn
             property int idx: root.idx
             flat:true
             checkable: true
             checked: root.checked
-            spacing: 15
             text: barJs.text
             icon.source: checked? barJs.iconChecked:barJs.icon
             display:root.shrinked?AbstractButton.IconOnly:AbstractButton.TextBesideIcon
@@ -28,6 +27,26 @@ Item {
             Component.onCompleted: {
                 root.button = btn
                 //console.log("btn:"+btn.text+" y:"+btn.y+" x:"+btn.x+" width:"+btn.width)
+            }
+            contentItem: Row{
+                anchors.left: parent.left
+                anchors.leftMargin: 30
+                spacing: 15
+                Image {
+                    height: parent.height
+                    width: height
+                    source: btn.icon.source
+                }
+                Text {
+                    height: parent.height
+                    text: btn.text
+                    font: btn.font
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            background: Rectangle{
+                color: "transparent"
             }
         }
     }
