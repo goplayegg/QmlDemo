@@ -1,5 +1,6 @@
 ﻿import QtQuick 2.12
 import QtQuick.Controls 2.5
+import "qrc:///global/"
 
 Item {
     id: root
@@ -22,7 +23,7 @@ Item {
             checked: root.checked
             text: barJs.text
             icon.source: checked? barJs.iconChecked:barJs.icon
-            display:root.shrinked?AbstractButton.IconOnly:AbstractButton.TextBesideIcon
+            //display:root.shrinked?AbstractButton.IconOnly:AbstractButton.TextBesideIcon
             onCheckedChanged: root.checked = checked
             Component.onCompleted: {
                 root.button = btn
@@ -30,14 +31,19 @@ Item {
             }
             contentItem: Row{
                 anchors.left: parent.left
-                anchors.leftMargin: 30
+                anchors.leftMargin: root.shrinked? (root.width+Global.sliderBarWidth-imgIcon.width)/2-Global.sliderBarWidth : 25
                 spacing: 15
                 Image {
+                    id: imgIcon
                     height: parent.height
                     width: height
                     source: btn.icon.source
+                    ToolTip.visible: root.shrinked && hovered
+                    ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+                    ToolTip.text: btn.text
                 }
                 Text {
+                    visible: !root.shrinked
                     height: parent.height
                     text: btn.text
                     font: btn.font

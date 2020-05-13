@@ -1,9 +1,10 @@
 ﻿import QtQuick 2.12
 import QtQuick.Controls 2.5
+import "qrc:///global/"
 
 Item{
     id:root
-    width: 6
+    width: Global.sliderBarWidth
     anchors.left: parent.left
 
     property int newY: 0

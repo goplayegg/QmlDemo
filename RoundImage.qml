@@ -38,7 +38,6 @@ Item {
     RoundMouseArea {
         propagateComposedEvents: true
         anchors.fill: parent
-        padding: control.padding
         onClicked: {
             control.clicked()
         }

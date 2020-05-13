@@ -25,5 +25,7 @@
         <file>e.png</file>
         <file>d.png</file>
         <file>avatar.jpg</file>
+        <file>global/Global.qml</file>
+        <file>global/qmldir</file>
     </qresource>
 </RCC>
