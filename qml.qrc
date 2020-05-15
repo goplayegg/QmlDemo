@@ -9,9 +9,6 @@
         <file>coment.png</file>
         <file>like.png</file>
         <file>LeftNevig.qml</file>
-        <file>Button.qml</file>
-        <file>Icon.qml</file>
-        <file>RoundButton.qml</file>
         <file>RoundImage.qml</file>
         <file>RoundMouseArea.qml</file>
         <file>a_z.png</file>
@@ -27,5 +24,12 @@
         <file>avatar.jpg</file>
         <file>global/Global.qml</file>
         <file>global/qmldir</file>
+        <file>a3a.png</file>
+        <file>a3c.png</file>
+        <file>a7p.png</file>
+        <file>a7p2.png</file>
+        <file>a4g.png</file>
+        <file>a4g2.png</file>
+        <file>u9Red.png</file>
     </qresource>
 </RCC>

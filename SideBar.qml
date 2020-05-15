@@ -16,6 +16,16 @@ Rectangle{
     property int norWidth: 312
     property int shrinkWidth: 80
 
+    function setVisible(idx, visib){
+        barModel.setProperty(idx, "hide", !visib)
+        var barItem = bars.itemAt(idx)
+        if(!visib && barItem.checked){
+            var btn = btnGroup.buttons[0]
+            btn.checked = true
+        }
+        defaultSelIdx = btnGroup.checkedButton.idx
+        timer.start()
+    }
 
     function addItem(js){
         count++
@@ -25,7 +35,7 @@ Rectangle{
 
     function changeSelect(idx){
         console.log("SideBar selected idx:"+idx)
-        var lastY = nextY()
+        var lastY = slider.y//nextY()
         curIdx = idx
         slider.newY = nextY()
         slider.newH = nextH()
@@ -33,11 +43,12 @@ Rectangle{
         if(sliderHMax<0){
             slider.maxH = -sliderHMax + slider.newH
             slider.goDown()
-        }else{
+        }else if(0 === sliderHMax){
+        }
+        else{
             slider.maxH = sliderHMax + slider.newH
             slider.goUp()
         }
-
     }
 
     function nextY(){
@@ -53,7 +64,6 @@ Rectangle{
 
     ButtonGroup {
         id: btnGroup
-        //buttons: colBars.children
         onClicked:{
             changeSelect(button.idx)
         }
@@ -96,7 +106,7 @@ Rectangle{
     }
     Timer{
         id:timer;
-        interval: 0
+        interval: 10
         onTriggered: {
             changeSelect(defaultSelIdx)
         }

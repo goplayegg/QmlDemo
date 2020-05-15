@@ -20,7 +20,8 @@ Rectangle{
         jsLogin = {
             "avatar":"qrc:/avatar.jpg",
             "username":"敌军还有30秒到达葬场",
-            "userid":"923834"}
+            "userid":"923834",
+            "level":"23"}
         console.log("jsLogin", JSON.stringify(jsLogin))
     }
 
@@ -71,6 +72,8 @@ Rectangle{
             onClicked: {
                 loginInfo()
                 logined = true
+                tabBar.setVisible(3, true)
+                tabBar.setVisible(6, true)
             }
         }
         RoundImage{
@@ -80,13 +83,17 @@ Rectangle{
             y: btnCategory.y+btnCategory.height+20
             anchors.horizontalCenter: parent.horizontalCenter
             size: shrinked?40:60
-            onClicked: logined = false
+            onClicked: {
+                logined = false
+                tabBar.setVisible(3, false)
+                tabBar.setVisible(6, false)
+            }
         }
         Text{
             id:txUserName
             visible: logined&&(!shrinked)
             text: jsLogin.username
-            font.pointSize: 10
+            font.pointSize: 12
             font.family: "微软雅黑"
             font.weight: Font.Bold
             anchors.top: imgAvatar.bottom
@@ -96,7 +103,8 @@ Rectangle{
         Text{
             id:txUserId
             visible: txUserName.visible
-            text: jsLogin.userid
+            text: "lv:" + jsLogin.level
+            font.family: "微软雅黑"
             anchors.top: txUserName.bottom
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
@@ -113,6 +121,7 @@ Rectangle{
                 Text {
                     text: modelData;
                     width: parent.width/3;
+                    font.family: "微软雅黑"
                     horizontalAlignment: Text.AlignHCenter;
                 }
             }
@@ -129,14 +138,14 @@ Rectangle{
         anchors.bottom: parent.bottom
 
         Component.onCompleted: {
-            tabBar.addItem({"spliter":true,"text":"","icon":"","iconChecked":""})
-            tabBar.addItem({"text":"btn1","icon":"qrc:/banana.png","iconChecked":"qrc:/like.png"})
-            tabBar.addItem({"text":"btn2","icon":"qrc:/like.png","iconChecked":"qrc:/banana.png"})
-            tabBar.addItem({"text":"btn3","icon":"qrc:/coment.png","iconChecked":"qrc:/like.png"})
-            tabBar.addItem({"text":"btn4","icon":"qrc:/banana.png","iconChecked":"qrc:/coment.png"})
+            tabBar.addItem({"spliter":true,"text":"","icon":"","iconChecked":"","hide":false})
+            tabBar.addItem({"text":qsTr("视频"),"icon":"qrc:/u9.png","iconChecked":"qrc:/u9Red.png"})
+            tabBar.addItem({"text":qsTr("文章"),"icon":"qrc:/a3a.png","iconChecked":"qrc:/a3c.png"})
+            tabBar.addItem({"text":qsTr("动态"),"icon":"qrc:/ub.png","iconChecked":"qrc:/uc.png","hide":true})
+            tabBar.addItem({"text":qsTr("排行榜"),"icon":"qrc:/a7p2.png","iconChecked":"qrc:/a7p.png"})
             tabBar.addItem({"spliter":true})
-            tabBar.addItem({"text":"btn3","icon":"qrc:/coment.png","iconChecked":"qrc:/like.png"})
-            tabBar.addItem({"text":"btn4","icon":"qrc:/banana.png","iconChecked":"qrc:/coment.png"})
+            tabBar.addItem({"text":"设置","icon":"qrc:/a4g.png","iconChecked":"qrc:/a4g2.png","hide":true})
+            tabBar.addItem({"text":"关于","icon":"qrc:/ug.png","iconChecked":"qrc:/uh.png"})
         }
     }
 }

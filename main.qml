@@ -62,7 +62,7 @@ ApplicationWindow {
             }
             Repeater{
                 id:repRect
-                model:["red","pink","blue","black","yellow"]
+                model:["red","pink","blue","black","yellow","green","cyan","gray"]
                 delegate:
                     Loader{
                         property var rectCol: modelData

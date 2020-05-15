@@ -12,6 +12,7 @@ Item {
     property bool shrinked: false
     height: 45
     width: parent.width
+    visible: !barJs.hide
 
     Component {
         id: barComp
@@ -46,7 +47,8 @@ Item {
                     visible: !root.shrinked
                     height: parent.height
                     text: btn.text
-                    font: btn.font
+                    font.family: "微软雅黑"
+                    font.pointSize: 10
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -64,6 +66,7 @@ Item {
             anchors.fill: parent
             anchors.topMargin: 22
             anchors.bottomMargin: anchors.topMargin
+            anchors.rightMargin: Global.sliderBarWidth
             Rectangle {
                 color: "pink"
                 anchors.fill: parent
