@@ -12,9 +12,11 @@ Item{
     property int maxH: 0
 
     function goDown(){
+        root.visible = true
         animDown.start()
     }
     function goUp(){
+        root.visible = true
         animUp.start()
     }
 
@@ -33,6 +35,9 @@ Item{
             NumberAnimation { target: root; property: "height"; to: newH; duration: 100 }
             NumberAnimation { target: root; property: "y"; to: newY; duration: 100 }
         }
+        onFinished: {
+            root.visible = false
+        }
     }
     SequentialAnimation{
         id: animUp//向上滑动 先变y+height 再变height
@@ -41,5 +46,8 @@ Item{
             NumberAnimation { target: root; property: "y"; to: newY; duration: 200 }
         }
         NumberAnimation { target: root; property: "height"; to: newH; duration: 100 }
+        onFinished: {
+            root.visible = false
+        }
     }
 }

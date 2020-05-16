@@ -69,38 +69,47 @@ Rectangle{
         }
     }
 
-    Column{
-        id:colBars
+    ScrollView {
+        id: scroll
         anchors.top: parent.top
-        anchors.right: parent.right
+        anchors.topMargin: 10
+        anchors.bottom: btnShrink.top
+        anchors.bottomMargin: anchors.topMargin
         anchors.left: parent.left
-        anchors.leftMargin: slider.width
+        anchors.right: parent.right
+        clip: true
 
-        ListModel{
-            id:barModel
-        }
+        Column{
+            id:colBars
+            anchors.top: parent.top
+            width: root.width
 
-        Repeater{
-            id:bars
-            model: barModel
-            delegate: SideBarItem{
-                    barJs:model
-                    idx:index
-                    shrinked: root.shrinked
-                }
-            Component.onCompleted: {
-                var lsBtns = []
-                for(var i=0;i<count;++i){
-                    var btn = itemAt(i)
-                    if(btn.isBtn){
-                        lsBtns.push(btn.button)
+            ListModel{
+                id:barModel
+            }
+
+            Repeater{
+                id:bars
+                model: barModel
+                delegate: SideBarItem{
+                        barJs:model
+                        idx:index
+                        shrinked: root.shrinked
                     }
-                }
-                btnGroup.buttons = lsBtns
+                Component.onCompleted: {
+                    var lsBtns = []
+                    for(var i=0;i<count;++i){
+                        var btn = itemAt(i)
+                        if(btn.isBtn){
+                            lsBtns.push(btn.button)
+                        }
+                    }
+                    btnGroup.buttons = lsBtns
 
-                itemAt(defaultSelIdx).checked = true
-                timer.start()
-                console.log("bars onCompleted")
+                    itemAt(defaultSelIdx).checked = true
+                    timer.start()
+                    console.log("bars onCompleted")
+                }
             }
         }
     }
@@ -114,6 +123,11 @@ Rectangle{
 
     SideBarSlider{
         id: slider
+        onVisibleChanged: {
+            if(!visible){
+                btnGroup.checkedButton.leftChecked = true
+            }
+        }
     }
 
     Button{

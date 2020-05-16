@@ -5,6 +5,7 @@ import "qrc:///global/"
 Item {
     id: root
     property bool checked: false
+    property bool leftChecked: false
     property var barJs: ({})
     property int idx: 0
     property bool isBtn: !barJs.spliter
@@ -19,6 +20,7 @@ Item {
         Button {
             id: btn
             property int idx: root.idx
+            property bool leftChecked: false
             flat:true
             checkable: true
             checked: root.checked
@@ -26,13 +28,14 @@ Item {
             icon.source: checked? barJs.iconChecked:barJs.icon
             //display:root.shrinked?AbstractButton.IconOnly:AbstractButton.TextBesideIcon
             onCheckedChanged: root.checked = checked
+            onLeftCheckedChanged: root.leftChecked = leftChecked
             Component.onCompleted: {
                 root.button = btn
                 //console.log("btn:"+btn.text+" y:"+btn.y+" x:"+btn.x+" width:"+btn.width)
             }
             contentItem: Row{
                 anchors.left: parent.left
-                anchors.leftMargin: root.shrinked? (root.width+Global.sliderBarWidth-imgIcon.width)/2-Global.sliderBarWidth : 25
+                anchors.leftMargin: root.shrinked? (root.width-imgIcon.width)/2 : 25
                 spacing: 15
                 Image {
                     id: imgIcon
@@ -66,7 +69,8 @@ Item {
             anchors.fill: parent
             anchors.topMargin: 22
             anchors.bottomMargin: anchors.topMargin
-            anchors.rightMargin: Global.sliderBarWidth
+            anchors.rightMargin: Global.sliderBarWidth*2
+            anchors.leftMargin: Global.sliderBarWidth*2
             Rectangle {
                 color: "pink"
                 anchors.fill: parent
@@ -78,5 +82,23 @@ Item {
         id: barLoader
         anchors.fill: parent
         sourceComponent:barJs.spliter?splitComp:barComp
+    }
+
+    Rectangle {
+        color: "pink"
+        //anchors.verticalCenter: parent.verticalCenter
+        width: Global.sliderBarWidth
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.topMargin: 8
+        anchors.bottomMargin: anchors.topMargin
+        radius: 2
+        visible: root.leftChecked
+    }
+
+    onCheckedChanged: {
+        if(!root.checked){
+            button.leftChecked = false
+        }
     }
 }

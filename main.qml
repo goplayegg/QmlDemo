@@ -4,7 +4,7 @@ import QtQuick.Controls 2.5
 ApplicationWindow {
     visible: true
     width: 640
-    height: 650
+    height: 550
     title: qsTr("Scroll")
 
     ScrollView {
