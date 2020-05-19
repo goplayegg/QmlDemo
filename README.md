@@ -14,4 +14,3 @@ this is a qml demo about navigator animation 导航栏 of Acfun
 动画的起始结束位置，通过ButtonGroup.checkedButton 计算上一个和当前导航按钮的y坐标位置即可
 
 
-test commit
